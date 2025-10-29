@@ -253,14 +253,14 @@ const handleDateClick = (date) => {
 
   // Main Booking Step
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-x-hidden">
-      <div className="w-full max-w-7xl mx-auto p-4 md:p-8">
-        <div className={`grid md:grid-cols-2 gap-8 items-start min-h-[calc(100vh-4rem)] transition-all duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
-          
-          {/* Left Side - Video (Desktop Only) */}
-          {!isMobile && (
-            <div className="sticky top-8 transform transition-all duration-700 hover:scale-105">
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+  <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-x-hidden">
+    <div className="w-full h-full mx-auto p-4 md:p-8 lg:px-16 xl:px-24">
+      <div className={`grid md:grid-cols-2 gap-8 items-start min-h-[calc(100vh-4rem)] transition-all duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+        
+        {/* Left Side - Video (Desktop Only) */}
+        {!isMobile && (
+          <div className="sticky top-8 transform transition-all duration-700 hover:scale-105">
+            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
                 <div className="aspect-[9/16] max-h-[600px] bg-black rounded-2xl mb-6 border border-gray-700/30 overflow-hidden relative">
                   <video 
                     autoPlay 
