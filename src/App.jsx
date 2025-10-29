@@ -215,20 +215,21 @@ const handleDateClick = (date) => {
 
   // Confirmation Step
   // Confirmation Step
+// Confirmation Step
 if (step === 'confirmation') {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4">
-      <div className={`w-full max-w-2xl transform transition-all duration-700 ${isAnimating ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
-        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-12 border border-gray-700/50 shadow-2xl text-center">
+    <div className="min-h-screen w-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4">
+      <div className={`w-full max-w-3xl mx-auto transform transition-all duration-700 ${isAnimating ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-700/50 shadow-2xl text-center">
           <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full mx-auto mb-6 flex items-center justify-center transform animate-bounce">
             <Check className="w-10 h-10 text-white" />
           </div>
           
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             ✨ You're All Set! ✨
           </h2>
           
-          <p className="text-gray-400 text-lg mb-8">
+          <p className="text-gray-400 text-base md:text-lg mb-8">
             Your meeting with Zach has been confirmed.
           </p>
           
@@ -340,6 +341,14 @@ if (step === 'confirmation') {
                   </div>
                 </div>
 
+
+                <div className="grid grid-cols-7 gap-2 mb-2">
+                  {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(day => (
+                    <div key={day} className="text-center text-xs font-semibold text-gray-500 py-2">
+                      {day}
+                    </div>
+                  ))}
+                </div>
 
                 <div className="grid grid-cols-7 gap-2">
                   {getDaysInMonth(currentMonth).map((date, idx) => {
