@@ -214,51 +214,52 @@ const handleDateClick = (date) => {
   }
 
   // Confirmation Step
-  if (step === 'confirmation') {
+  // Confirmation Step
+if (step === 'confirmation') {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4 md:p-8 lg:px-16 xl:px-24">
-      <div className={`w-full transform transition-all duration-700 ${isAnimating ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
-        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-12 border border-gray-700/50 shadow-2xl text-center max-w-2xl mx-auto">
-            <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full mx-auto mb-6 flex items-center justify-center transform animate-bounce">
-              <Check className="w-10 h-10 text-white" />
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4">
+      <div className={`w-full max-w-2xl transform transition-all duration-700 ${isAnimating ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-12 border border-gray-700/50 shadow-2xl text-center">
+          <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full mx-auto mb-6 flex items-center justify-center transform animate-bounce">
+            <Check className="w-10 h-10 text-white" />
+          </div>
+          
+          <h2 className="text-4xl font-bold text-white mb-4">
+            ✨ You're All Set! ✨
+          </h2>
+          
+          <p className="text-gray-400 text-lg mb-8">
+            Your meeting with Zach has been confirmed.
+          </p>
+          
+          <div className="bg-black/30 rounded-2xl p-6 border border-gray-700/30 mb-8 text-left">
+            <div className="flex items-start gap-4 mb-4">
+              <Calendar className="w-6 h-6 text-purple-400 mt-1" />
+              <div>
+                <p className="text-gray-400 text-sm">Date & Time</p>
+                <p className="text-white font-semibold text-lg">{formatDate(selectedDate)}</p>
+                <p className="text-purple-400 font-semibold">{selectedTime}</p>
+              </div>
             </div>
             
-            <h2 className="text-4xl font-bold text-white mb-4">
-              ✨ You're All Set! ✨
-            </h2>
-            
-            <p className="text-gray-400 text-lg mb-8">
-              Your meeting with Zach has been confirmed.
+            <div className="border-t border-gray-700/50 pt-4">
+              <p className="text-gray-400 text-sm mb-2">Meeting Details</p>
+              <p className="text-white font-medium">{formData.firstName} {formData.lastName}</p>
+              <p className="text-gray-400 text-sm">{formData.email}</p>
+              <p className="text-gray-400 text-sm">+1 {formData.phone}</p>
+            </div>
+          </div>
+          
+          <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-4 border border-purple-500/20">
+            <p className="text-gray-300 text-sm">
+              📧 A confirmation email has been sent to <span className="text-purple-400 font-semibold">{formData.email}</span>
             </p>
-            
-            <div className="bg-black/30 rounded-2xl p-6 border border-gray-700/30 mb-8 text-left">
-              <div className="flex items-start gap-4 mb-4">
-                <Calendar className="w-6 h-6 text-purple-400 mt-1" />
-                <div>
-                  <p className="text-gray-400 text-sm">Date & Time</p>
-                  <p className="text-white font-semibold text-lg">{formatDate(selectedDate)}</p>
-                  <p className="text-purple-400 font-semibold">{selectedTime}</p>
-                </div>
-              </div>
-              
-              <div className="border-t border-gray-700/50 pt-4">
-                <p className="text-gray-400 text-sm mb-2">Meeting Details</p>
-                <p className="text-white font-medium">{formData.firstName} {formData.lastName}</p>
-                <p className="text-gray-400 text-sm">{formData.email}</p>
-                <p className="text-gray-400 text-sm">+1 {formData.phone}</p>
-              </div>
-            </div>
-            
-            <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-4 border border-purple-500/20">
-              <p className="text-gray-300 text-sm">
-                📧 A confirmation email has been sent to <span className="text-purple-400 font-semibold">{formData.email}</span>
-              </p>
-            </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   // Main Booking Step
   return (
