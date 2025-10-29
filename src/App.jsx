@@ -314,7 +314,7 @@ if (step === 'confirmation') {
               
               <div className="mb-6">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                  Book Your Strategy Call
+                  Get Your Free Cash Offer Now
                 </h3>
                 <p className="text-gray-400">30 minutes • Free consultation</p>
               </div>
