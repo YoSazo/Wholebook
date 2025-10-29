@@ -68,29 +68,35 @@ const BookingPage = () => {
   };
 
   const getDaysInMonth = (date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const daysInMonth = lastDay.getDate();
-    const startingDayOfWeek = firstDay.getDay();
-    
-    const days = [];
-    for (let i = 0; i < startingDayOfWeek; i++) {
-      days.push(null);
-    }
-    for (let i = 1; i <= daysInMonth; i++) {
-      days.push(new Date(year, month, i));
-    }
-    return days;
-  };
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const daysInMonth = lastDay.getDate();
+  const startingDayOfWeek = firstDay.getDay();
+  
+  const days = [];
+  for (let i = 0; i < startingDayOfWeek; i++) {
+    days.push(null);
+  }
+  for (let i = 1; i <= daysInMonth; i++) {
+    days.push(new Date(year, month, i));
+  }
+  return days;
+};
 
-  const handleDateClick = (date) => {
-    if (!date || date < new Date().setHours(0, 0, 0, 0)) return;
-    setSelectedDate(date);
-    setSelectedTime(null);
-    setShowTimeSlots(true);
-  };
+// Fix the date comparison
+const handleDateClick = (date) => {
+  if (!date) return;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  if (date < today) return; // Fixed comparison
+  
+  setSelectedDate(date);
+  setSelectedTime(null);
+  setShowTimeSlots(true);
+};
+
 
   const handleTimeClick = (time) => {
     setSelectedTime(time);
@@ -324,19 +330,15 @@ const BookingPage = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-7 gap-2 mb-2">
-                  {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(day => (
-                    <div key={day} className="text-center text-xs font-semibold text-gray-500 py-2">
-                      {day}
-                    </div>
-                  ))}
-                </div>
-
                 <div className="grid grid-cols-7 gap-2">
                   {getDaysInMonth(currentMonth).map((date, idx) => {
                     const isSelected = selectedDate && date && 
                       date.toDateString() === selectedDate.toDateString();
-                    const isPast = date && date < new Date().setHours(0, 0, 0, 0);
+                    
+                    // Fixed isPast check
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const isPast = date && date < today;
                     
                     return (
                       <button
@@ -346,7 +348,7 @@ const BookingPage = () => {
                         className={`
                           aspect-square rounded-xl text-sm font-medium transition-all duration-300
                           ${!date ? 'invisible' : ''}
-                          ${isPast ? 'text-gray-700 cursor-not-allowed' : ''}
+                          ${isPast ? 'text-gray-700 cursor-not-allowed bg-gray-800/20' : ''}
                           ${isSelected 
                             ? 'bg-gradient-to-br from-purple-600 to-blue-600 text-white scale-110 shadow-lg shadow-purple-500/50' 
                             : date && !isPast 
