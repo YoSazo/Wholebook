@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, Clock, Check, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { trackBooking, trackPageView } from './trackingService';
 
+
 const BookingPage = () => {
   const [step, setStep] = useState('video');
   const [selectedDate, setSelectedDate] = useState(null);
@@ -90,12 +91,20 @@ const handleDateClick = (date) => {
   if (!date) return;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  if (date < today) return; // Fixed comparison
+  if (date < today) return;
   
   setSelectedDate(date);
   setSelectedTime(null);
   setShowTimeSlots(true);
+  
+  // Scroll to time slots after animation
+  setTimeout(() => {
+    if (timeSlotsRef.current) {
+      timeSlotsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, 200);
 };
+
 
 
   const handleTimeClick = (time) => {
@@ -208,8 +217,8 @@ const handleDateClick = (date) => {
   if (step === 'confirmation') {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4 md:p-8 lg:px-16 xl:px-24">
-      <div className={`w-full max-w-4xl transform transition-all duration-700 ${isAnimating ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
-          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-12 border border-gray-700/50 shadow-2xl text-center">
+      <div className={`w-full transform transition-all duration-700 ${isAnimating ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-12 border border-gray-700/50 shadow-2xl text-center max-w-2xl mx-auto">
             <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full mx-auto mb-6 flex items-center justify-center transform animate-bounce">
               <Check className="w-10 h-10 text-white" />
             </div>
@@ -319,16 +328,17 @@ const handleDateClick = (date) => {
                       onClick={() => changeMonth(-1)}
                       className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-600/50"
                     >
-                      <ChevronLeft className="w-5 h-5 text-white" />
+                      <ChevronLeft className="w-6 h-6 text-white" />
                     </button>
                     <button
                       onClick={() => changeMonth(1)}
                       className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-600/50"
                     >
-                      <ChevronRight className="w-5 h-5 text-white" />
+                      <ChevronRight className="w-6 h-6 text-white" />
                     </button>
                   </div>
                 </div>
+
 
                 <div className="grid grid-cols-7 gap-2">
                   {getDaysInMonth(currentMonth).map((date, idx) => {
