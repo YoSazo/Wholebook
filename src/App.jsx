@@ -152,17 +152,30 @@ const BookingPage = () => {
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex flex-col items-center justify-center p-4">
         <div className={`w-full max-w-md transform transition-all duration-500 ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
           <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
-            <div className="aspect-[9/16] bg-black rounded-2xl mb-6 border border-gray-700/30 overflow-hidden">
+            <div className="aspect-[9/16] bg-black rounded-2xl mb-6 border border-gray-700/30 overflow-hidden relative">
               <video 
                 autoPlay 
                 loop 
                 muted 
                 playsInline
                 className="w-full h-full object-cover"
+                id="mobileVideo"
               >
                 <source src="/zach.mov" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
+              
+              {/* Unmute button */}
+              <button
+                onClick={(e) => {
+                  const video = document.getElementById('mobileVideo');
+                  video.muted = !video.muted;
+                  e.currentTarget.textContent = video.muted ? '🔇' : '🔊';
+                }}
+                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-10"
+              >
+                🔇
+              </button>
             </div>
             
             <h1 className="text-3xl font-bold text-white mb-3 text-center">
@@ -242,17 +255,30 @@ const BookingPage = () => {
           {!isMobile && (
             <div className="sticky top-8 transform transition-all duration-700 hover:scale-105">
               <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
-                <div className="aspect-[9/16] max-h-[600px] bg-black rounded-2xl mb-6 border border-gray-700/30 overflow-hidden">
+                <div className="aspect-[9/16] max-h-[600px] bg-black rounded-2xl mb-6 border border-gray-700/30 overflow-hidden relative">
                   <video 
                     autoPlay 
                     loop 
                     muted 
                     playsInline
                     className="w-full h-full object-cover"
+                    id="desktopVideo"
                   >
                     <source src="/zach.mov" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
+                  
+                  {/* Unmute button */}
+                  <button
+                    onClick={(e) => {
+                      const video = document.getElementById('desktopVideo');
+                      video.muted = !video.muted;
+                      e.currentTarget.textContent = video.muted ? '🔇' : '🔊';
+                    }}
+                    className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-10"
+                  >
+                    🔇
+                  </button>
                 </div>
                 
                 <h2 className="text-3xl font-bold text-white mb-3">
