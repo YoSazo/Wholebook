@@ -182,7 +182,7 @@ const BookingPage = () => {
               Hi, I'm Zach
             </h1>
             <p className="text-gray-400 text-center mb-8">
-              Let's schedule a call to discuss how we can accelerate your wholesale business growth.
+              Schedule a quick call with us so we can review your property and give you a fair, all-cash offer—no repairs, no fees, no middlemen.
             </p>
             
             <button
@@ -285,7 +285,7 @@ const BookingPage = () => {
                   Hi, I'm Zach
                 </h2>
                 <p className="text-gray-400">
-                  Let's schedule a call to discuss how we can accelerate your wholesale business growth. I'll show you proven strategies that have helped dozens of businesses scale profitably.
+                  Schedule a quick call with us so we can review your property and give you a fair, all-cash offer—no repairs, no fees, no middlemen.
                 </p>
               </div>
             </div>
