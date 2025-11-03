@@ -176,7 +176,7 @@ const handleDateClick = (date) => {
                 className="w-full h-full object-cover"
                 id="mobileVideo"
               >
-                <source src="/zach.mov" type="video/mp4" />
+                <source src="/zach.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               
@@ -281,7 +281,7 @@ if (step === 'confirmation') {
                     className="w-full h-full object-cover"
                     id="desktopVideo"
                   >
-                    <source src="/zach.mov" type="video/mp4" />
+                    <source src="/zach.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   
