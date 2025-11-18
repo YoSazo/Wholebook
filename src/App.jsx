@@ -4,7 +4,7 @@ import { trackBooking, trackPageView } from './trackingService';
 import { termsOfServiceText } from './TermsOfService';
 
 const BookingPage = () => {
-  const [step, setStep] = useState('video');
+  const [step, setStep] = useState('booking'); // Changed from 'video' to 'booking'
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [showTimeSlots, setShowTimeSlots] = useState(false);
@@ -13,10 +13,9 @@ const BookingPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
+  const [isChangingMonth, setIsChangingMonth] = useState(false); // New state for month transition
   const timeSlotsRef = useRef(null);
   const formRef = useRef(null);
-
-  // ... existing useEffects ...
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -51,7 +50,6 @@ const BookingPage = () => {
     '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
   ];
 
-  // Phone formatting function
   const formatPhoneNumber = (value) => {
     const phoneNumber = value.replace(/\D/g, '');
     
@@ -87,16 +85,14 @@ const BookingPage = () => {
     return days;
   };
 
-  // Updated to only allow weekdays
   const handleDateClick = (date) => {
     if (!date) return;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     if (date < today) return;
     
-    // Check if it's a weekend (0 = Sunday, 6 = Saturday)
     const dayOfWeek = date.getDay();
-    if (dayOfWeek === 0 || dayOfWeek === 6) return; // Block weekends
+    if (dayOfWeek === 0 || dayOfWeek === 6) return;
     
     setSelectedDate(date);
     setSelectedTime(null);
@@ -111,14 +107,6 @@ const BookingPage = () => {
 
   const handleTimeClick = (time) => {
     setSelectedTime(time);
-  };
-
-  const handleNextStep = () => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      setStep('booking');
-      setIsAnimating(false);
-    }, 300);
   };
 
   const handleBooking = async (e) => {
@@ -156,11 +144,13 @@ const BookingPage = () => {
   ];
 
   const changeMonth = (direction) => {
+    setIsChangingMonth(true);
     setCurrentMonth(prev => {
       const newDate = new Date(prev);
       newDate.setMonth(prev.getMonth() + direction);
       return newDate;
     });
+    setTimeout(() => setIsChangingMonth(false), 150);
   };
 
   // Terms Modal Component
@@ -201,60 +191,9 @@ const BookingPage = () => {
     );
   };
 
-  // ... Video step (unchanged) ...
+  // REMOVED MOBILE VIDEO STEP - Goes straight to booking
 
-  if (isMobile && step === 'video') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex flex-col items-center justify-center p-4">
-        <div className={`w-full max-w-md transform transition-all duration-500 ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
-            <div className="aspect-[9/16] bg-black rounded-2xl mb-6 border border-gray-700/30 overflow-hidden relative">
-              <video 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="w-full h-full object-cover"
-                id="mobileVideo"
-              >
-                <source src="/zach.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              
-              <button
-                onClick={(e) => {
-                  const video = document.getElementById('mobileVideo');
-                  video.muted = !video.muted;
-                  e.currentTarget.textContent = video.muted ? '🔇' : '🔊';
-                }}
-                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-10"
-              >
-                🔇
-              </button>
-            </div>
-            
-            <h1 className="text-3xl font-bold text-white mb-3 text-center">
-              Hi, I'm Zach
-            </h1>
-            <p className="text-gray-400 text-center mb-8">
-              Schedule a quick call with us so we can review your property and give you a fair, all-cash offer—no repairs, no fees, no middlemen.
-            </p>
-            
-            <button
-              onClick={handleNextStep}
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-semibold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 flex items-center justify-center gap-2"
-            >
-              Book Your Call
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ... Confirmation step (unchanged) ...
-
+  // Confirmation Step
   if (step === 'confirmation') {
     return (
       <div className="min-h-screen w-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4">
@@ -390,7 +329,7 @@ const BookingPage = () => {
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-7 gap-2">
+                  <div className={`grid grid-cols-7 gap-2 transition-opacity duration-150 ${isChangingMonth ? 'opacity-0' : 'opacity-100'}`}>
                     {getDaysInMonth(currentMonth).map((date, idx) => {
                       const isSelected = selectedDate && date && 
                         date.toDateString() === selectedDate.toDateString();
