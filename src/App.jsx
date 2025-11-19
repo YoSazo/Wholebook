@@ -247,49 +247,11 @@ const BookingPage = () => {
       
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-x-hidden">
         <div className="w-full h-full mx-auto p-4 md:p-8 lg:px-16 xl:px-24">
-          <div className={`grid md:grid-cols-2 gap-8 items-start min-h-[calc(100vh-4rem)] transition-all duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+          <div className={`flex justify-center items-start min-h-[calc(100vh-4rem)] transition-all duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
             
-            {/* Left Side - Video (Desktop Only) */}
-            {!isMobile && (
-              <div className="sticky top-8 transform transition-all duration-700 hover:scale-105">
-                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
-                  <div className="aspect-[9/16] max-h-[600px] bg-black rounded-2xl mb-6 border border-gray-700/30 overflow-hidden relative">
-                    <video 
-                      autoPlay 
-                      loop 
-                      muted 
-                      playsInline
-                      className="w-full h-full object-cover"
-                      id="desktopVideo"
-                    >
-                      <source src="/zach.mp4" type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                    
-                    <button
-                      onClick={(e) => {
-                        const video = document.getElementById('desktopVideo');
-                        video.muted = !video.muted;
-                        e.currentTarget.textContent = video.muted ? '🔇' : '🔊';
-                      }}
-                      className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-10"
-                    >
-                      🔇
-                    </button>
-                  </div>
-                  
-                  <h2 className="text-3xl font-bold text-white mb-3">
-                    Hi, I'm Zach
-                  </h2>
-                  <p className="text-gray-400">
-                    Schedule a quick call with us so we can review your property and give you a fair, all-cash offer—no repairs, no fees, no middlemen.
-                  </p>
-                </div>
-              </div>
-            )}
             
-            {/* Right Side - Booking Widget */}
-            <div className="transform transition-all duration-700 w-full">
+            {/* Booking Widget - Centered */}
+            <div className="transform transition-all duration-700 w-full max-w-2xl">
               <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-gray-700/50 shadow-2xl">
                 
                 <div className="mb-6">
