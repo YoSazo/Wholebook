@@ -270,15 +270,15 @@ const BookingPage = () => {
                     <div className="flex gap-2">
                       <button
                         onClick={() => changeMonth(-1)}
-                        className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-600/50"
+                        className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-600/50 text-white text-xl font-bold"
                       >
-                        <ChevronLeft className="w-6 h-6 text-white" />
+                        ←
                       </button>
                       <button
                         onClick={() => changeMonth(1)}
-                        className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-600/50"
+                        className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-600/50 text-white text-xl font-bold"
                       >
-                        <ChevronRight className="w-6 h-6 text-white" />
+                        →
                       </button>
                     </div>
                   </div>
